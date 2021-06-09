@@ -20,8 +20,7 @@
                     echo "ubit is too short";
                 }
                 else{
-                    //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/courses.php');
-                    //exit;
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/courses.php');
                 }
             }
             else{
