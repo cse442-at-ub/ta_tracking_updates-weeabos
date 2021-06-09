@@ -2,7 +2,7 @@
 function connect_to_database() {
   // Create database connection
   $DATABASE_HOST = "oceanus.cse.buffalo.edu"; // if using online server, need to change the name
-  $DATABASE_USER = "FILL_ME_IN"; // you can chnage to your ubit and person number below
+  $DATABASE_USER = "FILL_ME_IN"; // you can change to your ubit and person number below
   $DATABASE_PASS = "CHANGE_ME";
   $DATABASE_NAME = "UPDATE_ME";
   // Try and connect using the info above.
