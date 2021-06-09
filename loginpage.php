@@ -5,11 +5,12 @@
             UBIT: <input type="text" name="name"><br>
             
             
-            <input type="submit" name="btn">
+            <input type="submit" name="submit1">
         </form>
         
         <?php
-            $ubit = $_GET['name'];
+        if(isset($_POST["submit1"])){
+            $ubit = $_GET['name1'];
             $ubitlen = strlen($ubit);
             if(ctype_digit($ubit)){
                 
@@ -20,13 +21,13 @@
                     echo "ubit is too short";
                 }
                 else{
-                    //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/courses.php');
-                    //exit;
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/courses.php');
                 }
             }
             else{
                 echo "not a valid ubit numeric string";
             }
+        }
         ?>
     </body>
 </html>
