@@ -1,25 +1,40 @@
 <!DOCTYPE html>
-
 <html>
-<h1>Welcome Professor Hertz!</h1>
-
-<h2>Courses:</h2>
-
+<h1>
+<?php
+echo "Welcome " . $professor . "!";
+?>
+</h1>
+<h2>
+Courses:
+</h2>
 <body>
-CSE 115 - Computer Science I -
-<a href="tas.php">Teaching Assistants</a> -
-<a href="dates.php">Dates</a> -
-<a href="locations.php">Locations</a>
-<br> </br>
-CSE 116 - Computer Science II -
-<a href="tas.php">Teaching Assistants</a> -
-<a href="dates.php">Dates</a> -
-<a href="locations.php">Locations</a>
-<br> </br>
-CSE 442 - Software Engineering -
-<a href="tas.php">Teaching Assistants</a> -
-<a href="dates.php">Dates</a> -
-<a href="locations.php">Locations</a>
+
+<?php
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "myDB";
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+$sql = "SELECT DISTINCT course FROM professors";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    while($row = mysqli_fetch_assoc($result)) {
+       $row["course"]; ?> - 
+       <a href="tas.php">Teaching Assistants</a> - 
+       <a href="dates.php">Dates</a> - 
+       <a href="locations.php">Locations</a>
+       <?php
+    }
+} else {
+    echo "0 results";
+}
+
+mysqli_close($conn);
+?>
 
 </body>
 </html>
