@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html>
 <h1>
 <?php
@@ -24,7 +27,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT ta, day FROM sessions WHERE course = $course and location = $location";
+$sql = "SELECT ta, day FROM sessions WHERE course=$_SESSION["course"] and location=$_SESSION["location"]";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

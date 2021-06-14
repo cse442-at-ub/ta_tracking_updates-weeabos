@@ -17,7 +17,7 @@ $dbname = "myDB";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-$sql = "SELECT DISTINCT location FROM sessions";
+$sql = "SELECT DISTINCT location FROM sessions WHERE course=$_SESSION["course"]";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
