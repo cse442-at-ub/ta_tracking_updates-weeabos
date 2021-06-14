@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html>
-<h1>
-<?php
-echo "Welcome " . $professor . "!";
-?>
-</h1>
 <h2>
 Courses:
 </h2>
