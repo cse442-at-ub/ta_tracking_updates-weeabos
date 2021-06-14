@@ -16,7 +16,7 @@ $dbname = "myDB";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-$sql = "SELECT DISTINCT course FROM professors";
+$sql = "SELECT course FROM professors WHERE ubit_id=$_SESSION["id"]";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
