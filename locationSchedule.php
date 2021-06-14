@@ -29,7 +29,6 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
   echo "<table><tr><th>Teaching Assistant</th><th>Date</th></tr>";
-  // output data of each row
   while($row = $result->fetch_assoc()) {
     echo "<tr><td>" . $row["ta"]. "</td><td>" . $row["day"]. "</td></tr>";
   }
