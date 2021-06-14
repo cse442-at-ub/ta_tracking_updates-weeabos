@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html>
 <h1>
 Locations
@@ -19,7 +22,7 @@ $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
     while($row = mysqli_fetch_assoc($result)) ?> {
-         <a href="locationSchedule.php"> <?php $row["location"]; ?> </a>;
+         <a href="locationSchedule.php" <?php $_SESSION ["location"] = $row["location"];?>> <?php $row["location"]; ?> </a>;
     }
 <?php
 } else {
