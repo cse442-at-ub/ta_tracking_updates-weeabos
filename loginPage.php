@@ -1,23 +1,23 @@
 <?php
 session_start();
 $servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "myDB";
+$username = "root";
+$password = "";
+$dbname = "oceanus";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-   
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-     $ubit_id = mysqli_real_escape_string($conn,$_POST["ubit_id"]);
+     $ubit_id = mysqli_real_escape_string($conn,$_POST['ubit_id']);
      $sql = "SELECT ubit_id FROM professors WHERE ubit_id = '$ubit_id'";
      $result = mysqli_query($conn,$sql);
      $count = mysqli_num_rows($result);
-		
-     if($count < 0) {
+
+     if($count > 0) {
         $_SESSION["id"] = $ubit_id;
         header("Location: courses.php");
       } else {
-         $error = "Your UBIT ID is invalid";
+        echo '<script>alert("Your UBIT ID is invalid")</script>';
       }
    }
 ?>
