@@ -1,11 +1,12 @@
-<!DOCTYPE html>
 <?php
 session_start();
 ?>
+
+<!DOCTYPE html>
 <html>
 <h1>
 <?php
-echo $location . " Sessions";
+echo $_SESSION["location"] . " Sessions";
 ?>
 <style>
 table, th, td {
@@ -17,17 +18,13 @@ table, th, td {
 
 <?php
 $servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "myDB";
+$username = "root";
+$password = "";
+$dbname = "oceanus";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-
-$sql = "SELECT ta, day FROM sessions WHERE course=$_SESSION["course"] and location=$_SESSION["location"]";
+$sql = "SELECT ta, day FROM sessions WHERE course='{$_SESSION["course"]}' and location='{$_SESSION["location"]}'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
