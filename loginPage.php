@@ -1,9 +1,9 @@
 <?php
 session_start();
-$servername = "localhost";
+$servername = "oceanus.cse.buffalo.edu";
 $username = "anikaleg";
 $password = "50430407";
-$dbname = "oceanus";
+$dbname = "cse442_2021_summer_team_c_db";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
