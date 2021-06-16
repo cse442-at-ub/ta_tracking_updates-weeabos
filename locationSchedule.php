@@ -1,44 +1,55 @@
 <?php
 session_start();
-?>
 
+?>
 <!DOCTYPE html>
 <html>
-<h1>
-<?php
-echo $_SESSION["location"] . " Sessions";
-?>
+<head>
 <style>
-table, th, td {
-  border: 1px solid black;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
+
+table, td, th {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+th {text-align: left;}
 </style>
-</h1>
+</head>
 <body>
 
 <?php
+$q = strval($_GET['q']);
+
 $servername = "oceanus.cse.buffalo.edu";
 $username = "shreyaup";
 $password = "50260751";
 $dbname = "cse442_2021_summer_team_c_db";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+$sql = "SELECT * FROM office_hours WHERE location = '".$q."' AND course='{$_SESSION['course']}'";
+$result = mysqli_query($conn, $sql);
+$count = mysqli_num_rows($result);
 
-$sql = "SELECT email, start_time, expected_end FROM office_hours WHERE course='{$_SESSION["course"]}' and location='{$_SESSION["location"]}'";
-$result = $conn->query($sql);
+echo "<table>
+<tr>
+<th>emsil</th>
+<th>start time</th>
+<th>end time</th>
+</tr>";
+while($row = mysqli_fetch_array($result)) {
+  echo "<tr>";
+  echo "<td>" . $row['email'] . "</td>";
+  echo "<td>" . $row['start_time'] . "</td>";
+  echo "<td>" . $row['expected_end'] . "</td>";
 
-if ($result->num_rows > 0) {
-  echo "<table><tr><th>TA email</th><th>Office hour start</th><th>Office hour end</th></tr>";
-  while($row = $result->fetch_assoc()) {
-    echo "<tr><td>" . $row["email"]. "</td><td>" . $row["start_time"]. "</td><td>" . $row["expected_end"]. "</td></tr>";
-  }
-  echo "</table>";
-} else {
-  echo "0 results";
+  echo "</tr>";
 }
-
-$conn->close();
+echo "</table>";
+mysqli_close($conn);
 ?>
-
 </body>
 </html>
