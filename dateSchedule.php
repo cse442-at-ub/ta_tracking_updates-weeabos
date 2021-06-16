@@ -22,7 +22,7 @@ th {text-align: left;}
 <body>
 
 <?php
-$s =  strval($_GET['s']);
+$q =  strval($_GET['q']);
 
 $servername = "oceanus.cse.buffalo.edu";
 $username = "shreyaup";
@@ -30,7 +30,7 @@ $password = "50260751";
 $dbname = "cse442_2021_summer_team_c_db";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-$sql = "SELECT * FROM office_hours WHERE  DATE(start_time) AS Date = '".$s."' AND course='{$_SESSION['course']}'";
+$sql = "SELECT * FROM office_hours WHERE  JustDate = '".$q."' AND course='{$_SESSION['course']}'";
 $result = mysqli_query($conn, $sql);
 
 
