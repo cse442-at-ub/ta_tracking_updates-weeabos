@@ -39,7 +39,7 @@ $count = mysqli_num_rows($result);
 ?>
 <form>
 <select name="users" onchange="showUser(this.value)">
-<option value="">Select a Location:</option>
+<option value="">Select a Date:</option>
 <?php while($row = mysqli_fetch_array($result)){  ?>
   <option value= "<?php echo $row['JustDate']; ?>" > <?php echo $row['JustDate']; ?></option>
   <?php } ?>
