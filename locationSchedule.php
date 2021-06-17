@@ -36,7 +36,7 @@ $count = mysqli_num_rows($result);
 
 echo "<table>
 <tr>
-<th>emsil</th>
+<th>email</th>
 <th>start time</th>
 <th>end time</th>
 </tr>";
