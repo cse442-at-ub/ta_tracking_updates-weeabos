@@ -1,11 +1,10 @@
 <?php
 session_start();
-$servername = "oceanus.cse.buffalo.edu";
-$username = "anikaleg";
-$password = "50430407";
-$dbname = "cse442_2021_summer_team_c_db";
+require "lib/database.php";
+require "lib/constants.php";
+require "lib/taListBuilder.php";
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = connect_to_database();
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
      $ubit_id = mysqli_real_escape_string($conn,$_POST['ubit_id']);
