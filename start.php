@@ -67,7 +67,7 @@ if (!empty($_SESSION["uid"])) {
   }
 } else {
   http_response_code(400);
-  echo "Could not connect: Error connecting to shibboleth. Talk to Matthew to get this fixed.";
+  echo "Could not connect: Error connecting to the database.";
   exit();
 }
 ?>
