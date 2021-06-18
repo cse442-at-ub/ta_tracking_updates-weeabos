@@ -8,13 +8,14 @@ $conn = connect_to_database();
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
      $ubit_id = mysqli_real_escape_string($conn,$_POST['ubit_id']);
-     $sql = "SELECT ubit_id FROM professors WHERE ubit_id = '$ubit_id'";
+     $email = $ubit_id."@buffalo.edu";
+     $sql = "SELECT email FROM registered_users WHERE email = '$email'";
      $result = mysqli_query($conn,$sql);
      $count = mysqli_num_rows($result);
 
      if($count > 0) {
-        $_SESSION["id"] = $ubit_id;
-        header("Location: courses.php");
+        $_SESSION["uid"] = $ubit_id;
+        header("Location: start.php");
       } else {
         echo '<script>alert("Your UBIT ID is invalid")</script>';
       }
