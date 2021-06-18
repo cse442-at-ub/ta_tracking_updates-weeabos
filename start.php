@@ -48,12 +48,10 @@ if (!empty($_SESSION["uid"])) {
     $_SESSION["default_lengths"] = $default_lengths;
     // For faculty we will also record per-course lists of TAs
     if ($_SESSION['faculty']) {
-      echo "hello";
       $_SESSION["display_messages"] = $display_messages;
       $_SESSION['course_url'] = array();
       $_SESSION['ta_lists'] = array();
       foreach ($_SESSION["courses"] as $course) {
-        echo "2";
         $ta_list = buildTAList($conn, $course);
         $_SESSION['ta_lists'][$course] = $ta_list;
         $_SESSION['course_url'][$course] = "/CSE442-542/2021-Summer/cse-442c/active_list/TAList.php?class=" . urlencode($course);
@@ -69,7 +67,7 @@ if (!empty($_SESSION["uid"])) {
   }
 } else {
   http_response_code(400);
-  echo "Could not connect: Error connecting to the server. Talk to the IT department to get this fixed.";
+  echo "Could not connect: Error connecting to shibboleth. Talk to Matthew to get this fixed.";
   exit();
 }
 ?>
