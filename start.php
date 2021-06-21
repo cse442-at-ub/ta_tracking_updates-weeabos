@@ -34,7 +34,7 @@ if (!empty($_SESSION["uid"])) {
     $rows = array();
     $display_messages = array();
     $default_lengths = array();
-    $query_course_data=$conn->prepare("SELECT staff_list.course, display_message, default_length FROM staff_list INNER JOIN courses on staff_list.course = courses.course WHERE email=? AND active=1");
+    $query_course_data=$conn->prepare("SELECT staff_list.course, display_message, default_length FROM staff_list INNER JOIN courses on staff_list.course = courses.course WHERE email=? AND active=1 ORDER BY `staff_list`.`course` ASC");
     $query_course_data->bind_param('s',$_SESSION["emailUser"]);
     $query_course_data->execute();
     $course_data = $query_course_data->get_result();
