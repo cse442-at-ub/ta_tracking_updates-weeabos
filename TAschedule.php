@@ -7,7 +7,7 @@ session_start();
 <head>
 <style>
 table {
-  width: 60%;
+  width: 100%;
   border-collapse: collapse;
 }
 
@@ -30,7 +30,7 @@ $password = "50260751";
 $dbname = "cse442_2021_summer_team_c_db";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-$sql = "SELECT  * FROM office_hours WHERE email = '".$q."' AND course='{$_SESSION['course']}'";
+$sql = "SELECT  * FROM office_hours WHERE email = '".$q."' AND course='{$_SESSION['courseSelected']}'";
 $result = mysqli_query($conn, $sql);
 $count = mysqli_num_rows($result);
 
