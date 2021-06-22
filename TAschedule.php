@@ -7,7 +7,7 @@ session_start();
 <head>
 <style>
 table {
-  width: 100%;
+  width: 60%;
   border-collapse: collapse;
 }
 
