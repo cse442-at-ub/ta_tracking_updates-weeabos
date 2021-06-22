@@ -1,6 +1,20 @@
 <?php
 session_start();
-$_SESSION['course'] = 'CSE331';
+$_SESSION['course'] = 'CSE 101';
+
+if(isset($_GET['hello'])){
+  header('Content-Type: text/csv; charset=utf-8');
+  // tell the browser we want to save it instead of displaying it
+  header('Content-Disposition: attachment; filename=locations.csv');
+  $f = fopen('php://output', 'w');  
+  fputcsv($f,array('Email', 'Course', 'Location', 'start_time','expected_end'));
+  foreach($_SESSION['csvDownloadArr'] as $outer){
+    fputcsv($f, $outer);
+  }
+  fclose($f);
+  exit();
+}
+
 ?>
 <html>
 <head>
@@ -34,6 +48,7 @@ $sql = "SELECT DISTINCT location FROM office_hours WHERE course='{$_SESSION['cou
 $result = mysqli_query($conn, $sql);
 $count = mysqli_num_rows($result);
 $rows = array();
+
 while($row = mysqli_fetch_array($result)){
   $rows[] = $row['location'];
 }

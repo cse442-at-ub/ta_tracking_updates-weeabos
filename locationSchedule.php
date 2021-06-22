@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,6 +24,8 @@ th {text-align: left;}
 <body>
 
 <?php
+
+
 $q = strval($_GET['q']);
 
 $servername = "oceanus.cse.buffalo.edu";
@@ -33,6 +37,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 $sql = "SELECT * FROM office_hours WHERE location = '".$q."' AND course='{$_SESSION['course']}'";
 $result = mysqli_query($conn, $sql);
 $count = mysqli_num_rows($result);
+$csvDownloadArr = array();
+$counter = 0;
+
 
 echo "<table>
 <tr>
@@ -40,16 +47,23 @@ echo "<table>
 <th>start time</th>
 <th>end time</th>
 </tr>";
+
 while($row = mysqli_fetch_array($result)) {
   echo "<tr>";
   echo "<td>" . $row['email'] . "</td>";
   echo "<td>" . $row['start_time'] . "</td>";
   echo "<td>" . $row['expected_end'] . "</td>";
-
+  $tableentry = array($row['email'], $row['course'], $row['location'], $row['start_time'], $row['expected_end']);
+  $csvDownloadArr[$counter] = $tableentry;
   echo "</tr>";
+  $counter++;
 }
 echo "</table>";
+
+$_SESSION['csvDownloadArr'] = $csvDownloadArr;
 mysqli_close($conn);
 ?>
+<br></br>
+<a href="locations.php?hello=true" >Download</a>
 </body>
 </html>
