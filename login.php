@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
      $sql = $conn->prepare("SELECT email FROM registered_users WHERE email = ?");
      $sql->bind_param("s", $email);
      $sql->execute();
-     $result = mysqli_query($conn,$sql);
+     $result = $sql->get_result();
      $count = mysqli_num_rows($result);
 
      if($count > 0) {
