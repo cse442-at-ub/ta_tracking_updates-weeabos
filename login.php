@@ -1,4 +1,8 @@
 <?php
+if (
+   (!isset($_SERVER['HTTPS'])||($_SERVER['HTTPS']!='on')))
+{header('Location: '. 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);}
+
 session_start();
 require "lib/database.php";
 require "lib/constants.php";
@@ -9,7 +13,9 @@ $conn = connect_to_database();
 if($_SERVER["REQUEST_METHOD"] == "POST") {
      $ubit_id = mysqli_real_escape_string($conn,$_POST['ubit_id']);
      $email = $ubit_id."@buffalo.edu";
-     $sql = "SELECT email FROM registered_users WHERE email = '$email'";
+     $sql = $conn->prepare("SELECT email FROM registered_users WHERE email = ?");
+     $sql->bind_param("s", $email);
+     $sql->execute();
      $result = mysqli_query($conn,$sql);
      $count = mysqli_num_rows($result);
 
