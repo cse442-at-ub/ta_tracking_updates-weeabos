@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['course'] = 'CSE331';
+$course = $_SESSION['courseSelected'];
 ?>
 <html>
 <head>
@@ -8,7 +8,7 @@ $_SESSION['course'] = 'CSE331';
 function showUser(str) {
   if (str == "") {
     document.getElementById("txtHint").innerHTML = "";
-    
+
     return;
   } else {
     var xmlhttp = new XMLHttpRequest();
@@ -31,7 +31,7 @@ $password = "50260751";
 $dbname = "cse442_2021_summer_team_c_db";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-$sql = "SELECT DISTINCT JustDate FROM office_hours WHERE course='{$_SESSION['course']}'";
+$sql = "SELECT DISTINCT JustDate FROM office_hours WHERE course='{$_SESSION['courseSelected']}'";
 $result = mysqli_query($conn, $sql);
 $count = mysqli_num_rows($result);
 
@@ -44,7 +44,7 @@ $count = mysqli_num_rows($result);
   <option value= "<?php echo $row['JustDate']; ?>" > <?php echo $row['JustDate']; ?></option>
   <?php } ?>
 </select>
-  
+
 </form>
 
 <br>
