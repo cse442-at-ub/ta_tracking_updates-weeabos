@@ -11,7 +11,8 @@ require "lib/taListBuilder.php";
 $conn = connect_to_database();
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-     $ubit_id = mysqli_real_escape_string($conn,$_POST['ubit_id']);
+     $ubit_id_nr = mysqli_real_escape_string($conn,$_POST['ubit_id']);
+     $ubit_id = htmlspecialchars($ubit_id_nr);
      $email = $ubit_id."@buffalo.edu";
      $sql = $conn->prepare("SELECT email FROM registered_users WHERE email = ?");
      $sql->bind_param("s", $email);
