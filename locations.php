@@ -1,4 +1,9 @@
 <?php
+
+if (
+  (!isset($_SERVER['HTTPS'])||($_SERVER['HTTPS']!='on')))
+{header('Location: '. 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);}
+
 session_start();
 
 if(isset($_GET['hello'])){
@@ -43,8 +48,12 @@ $password = "50260751";
 $dbname = "cse442_2021_summer_team_c_db";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-$sql = "SELECT DISTINCT location FROM office_hours WHERE course='{$_SESSION['courseSelected']}'";
-$result = mysqli_query($conn, $sql);
+$course = $_SESSION['courseSelected'];
+$sql =$conn->prepare( "SELECT DISTINCT location FROM office_hours WHERE course= ?");
+
+$sql->bind_param("s", $course);
+$sql->execute();
+$result = $sql->get_result();
 $count = mysqli_num_rows($result);
 $rows = array();
 

@@ -1,4 +1,8 @@
 <?php
+
+if (
+  (!isset($_SERVER['HTTPS'])||($_SERVER['HTTPS']!='on')))
+{header('Location: '. 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);}
 session_start();
 ?>
 <!DOCTYPE html>
@@ -31,8 +35,11 @@ $password = "50260751";
 $dbname = "cse442_2021_summer_team_c_db";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-$sql = "SELECT * FROM office_hours WHERE location = '".$q."' AND course='{$_SESSION['courseSelected']}'";
-$result = mysqli_query($conn, $sql);
+$course = $_SESSION['courseSelected'];
+$sql = $conn->prepare("SELECT * FROM office_hours WHERE location = ? AND course= ?");
+$sql->bind_param("ss", $q, $course);
+$sql->execute();
+$result = $sql->get_result();
 $count = mysqli_num_rows($result);
 $csvDownloadArr = array();
 $counter = 0;
