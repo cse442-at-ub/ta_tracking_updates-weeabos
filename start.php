@@ -9,19 +9,16 @@ $conn = connect_to_database();
 $error_message = "";
 
 // Check if this user is submitting a one-time password
-if (!empty($_SERVER["uid"])) {
-  $email = $_SERVER["uid"]."@buffalo.edu";
-
+if (!empty($_SESSION["uid"])) {
+  $email = $_SESSION["uid"]."@buffalo.edu";
   $stmt_request = $conn->prepare("SELECT * FROM registered_users WHERE email=?");
   $stmt_request->bind_param('s',$email);
   $stmt_request->execute();
   $result = $stmt_request->get_result();
   $count  = mysqli_num_rows($result);
-
   if ($count > 0) {
     // Set up the SESSION variables
     $_SESSION["emailUser"] = $email;
-
     // Get the user's first name and faculty status
     $query_session_data = $conn->prepare("SELECT first_name, last_name, faculty, default_location FROM registered_users WHERE email=?");
     $query_session_data->bind_param('s',$_SESSION["emailUser"]);
@@ -37,10 +34,11 @@ if (!empty($_SERVER["uid"])) {
     $rows = array();
     $display_messages = array();
     $default_lengths = array();
-    $query_course_data=$conn->prepare("SELECT staff_list.course, display_message, default_length FROM staff_list INNER JOIN courses on staff_list.course = courses.course WHERE email=? AND active=1");
+    $query_course_data=$conn->prepare("SELECT staff_list.course, display_message, default_length FROM staff_list INNER JOIN courses on staff_list.course = courses.course WHERE email=? AND active=1 ORDER BY `staff_list`.`course` ASC");
     $query_course_data->bind_param('s',$_SESSION["emailUser"]);
     $query_course_data->execute();
     $course_data = $query_course_data->get_result();
+
     while ($row = $course_data->fetch_array(MYSQLI_ASSOC)) {
       $rows[] = $row["course"];
       $display_messages[$row["course"]] = $row["display_message"];
@@ -56,11 +54,11 @@ if (!empty($_SERVER["uid"])) {
       foreach ($_SESSION["courses"] as $course) {
         $ta_list = buildTAList($conn, $course);
         $_SESSION['ta_lists'][$course] = $ta_list;
-        $_SESSION['course_url'][$course] = SITE_HOME . "/active_list/TAList.php?class=" . urlencode($course);
+        $_SESSION['course_url'][$course] = "/CSE442-542/2021-Summer/cse-442c/active_list/TAList.php?class=" . urlencode($course);
       }
-      header("Location: ". SITE_HOME . "/faculty/facultyManage.php");
+      header("Location: /CSE442-542/2021-Summer/cse-442c/faculty/facultyManage.php");
     } else {
-      header("Location: ". SITE_HOME . "/office_hours/oh.php");
+      header("Location: /CSE442-542/2021-Summer/cse-442c/office_hours/oh.php");
     }
   } else {
     http_response_code(400);
@@ -69,7 +67,7 @@ if (!empty($_SERVER["uid"])) {
   }
 } else {
   http_response_code(400);
-  echo "Could not connect: Error connecting to shibboleth. Talk to Matthew to get this fixed.";
+  echo "Could not connect: Error connecting to the database.";
   exit();
 }
 ?>
