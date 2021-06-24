@@ -186,7 +186,7 @@ $_SESSION['status']=NULL;
                 </div>
                 <div id="manualAddCourse" class="collapse" aria-labelledby="addCourse" data-parent="#AddAccordian">
                   <div class="card-body">
-                    <form method="post" action="./add.php">
+                    <form method="post" action="./addCourse.php">
                       <div class="form-group">
                         <label for="course">Course</label>
                         <input type="text" name="course" class="form-control" placeholder="Ex: CSE 101" required />

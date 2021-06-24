@@ -36,4 +36,20 @@ function addTA($conn, $firstName, $lastName, $email) {
   }
   return TRUE;
 }
+
+function addCourse($conn, $professor_email, $course, $class_name, $length, $location) {
+
+  $stmt_add_course = $conn->prepare("INSERT INTO staff_list (staff_list_id, email, course) VALUES (NULL,?,?)");
+  $stmt_add_course->bind_param('ss', $professor_email, $course);
+  $add_success = $stmt_add_course->execute();
+  if (!$add_success) {
+    return FALSE;
+  }
+  $stmt_add_course = $conn->prepare("INSERT INTO courses (course, class_name, active, display_message, default_length, default_location) VALUES (?,?,1,?,?)");
+  $stmt_add_course->bind_param('sssis', $course, $class_name, "Welcome!", $length, $location);
+  $add_success = $stmt_add_course->execute();
+  if (!$add_success) {
+    return FALSE;
+  }
+}
 ?>
