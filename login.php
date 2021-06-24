@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["uid"] = $ubit_id;
         header("Location: start.php");
       } else {
-        echo '<script>alert("Your UBIT ID is invalid")</script>';
+        echo "Your UBIT ID is invalid";
       }
    }
 ?>
