@@ -38,6 +38,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 $course = $_SESSION['courseSelected'];
 $sql = $conn->prepare( "SELECT  * FROM office_hours WHERE email = ? AND course= ?");
 $sql->bind_param("ss", $q, $course);
+$sql->execute();
 $result = $sql->get_result();
 $count = mysqli_num_rows($result);
 
