@@ -119,7 +119,8 @@ $_SESSION['status']=NULL;
         <li class="nav-item">
           <a class="nav-link" id="pills-data-tab" data-toggle="pill" href="#pills-data" role="tab" aria-controls="pills-data" aria-selected="false">Course Data</a>
         </li>
-      </ul>
+        </ul>
+
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-ta" role="tabpanel" aria-labelledby="pills-ta-tab">
           <div class="table-responsive">
@@ -138,6 +139,10 @@ $_SESSION['status']=NULL;
               </tbody>
             </table>
             <br/>
+            <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/TAinfo.php" class="button">Sort by TA</a> -
+            <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/locations.php" class="button">Sort by Location</a> -
+            <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/datesinfo.php" class="button">Sort by Date</a>
+            <br> </br>
 
               <!-- submit form -->
             <div class="accordian" id="AddAccordian">

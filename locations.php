@@ -1,6 +1,24 @@
 <?php
+
+if (
+  (!isset($_SERVER['HTTPS'])||($_SERVER['HTTPS']!='on')))
+{header('Location: '. 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);}
+
 session_start();
-$_SESSION['course'] = 'CSE331';
+
+if(isset($_GET['hello'])){
+  header('Content-Type: text/csv; charset=utf-8');
+  // tell the browser we want to save it instead of displaying it
+  header('Content-Disposition: attachment; filename=locations.csv');
+  $f = fopen('php://output', 'w');
+  fputcsv($f,array('Email', 'Course', 'Location', 'start_time','expected_end'));
+  foreach($_SESSION['csvDownloadArr'] as $outer){
+    fputcsv($f, $outer);
+  }
+  fclose($f);
+  exit();
+}
+
 ?>
 <html>
 <head>
@@ -30,10 +48,15 @@ $password = "50260751";
 $dbname = "cse442_2021_summer_team_c_db";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-$sql = "SELECT DISTINCT location FROM office_hours WHERE course='{$_SESSION['course']}'";
-$result = mysqli_query($conn, $sql);
+$course = $_SESSION['courseSelected'];
+$sql =$conn->prepare( "SELECT DISTINCT location FROM office_hours WHERE course= ?");
+
+$sql->bind_param("s", $course);
+$sql->execute();
+$result = $sql->get_result();
 $count = mysqli_num_rows($result);
 $rows = array();
+
 while($row = mysqli_fetch_array($result)){
   $rows[] = $row['location'];
 }
@@ -46,11 +69,11 @@ while($row = mysqli_fetch_array($result)){
   <option value= "<?php echo $rows[$i]; ?>" > <?php echo $rows[$i]; ?></option>
   <?php } ?>
   </select>
-  
+
 </form>
 
 <br>
-<div id="txtHint"><b>Location information for <?php echo $_SESSION['course'] ?> will be shown</b></div>
+<div id="txtHint"><b>Location information for <?php echo $_SESSION['courseSelected'] ?> will be shown</b></div>
 
 </body>
 </html>

@@ -1,13 +1,16 @@
 <?php
-session_start();
 
+if (
+  (!isset($_SERVER['HTTPS'])||($_SERVER['HTTPS']!='on')))
+{header('Location: '. 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);}
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <style>
 table {
-  width: 100%;
+  width: 60%;
   border-collapse: collapse;
 }
 
@@ -22,6 +25,8 @@ th {text-align: left;}
 <body>
 
 <?php
+
+
 $q = strval($_GET['q']);
 
 $servername = "oceanus.cse.buffalo.edu";
@@ -30,9 +35,15 @@ $password = "50260751";
 $dbname = "cse442_2021_summer_team_c_db";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-$sql = "SELECT * FROM office_hours WHERE location = '".$q."' AND course='{$_SESSION['course']}'";
-$result = mysqli_query($conn, $sql);
+$course = $_SESSION['courseSelected'];
+$sql = $conn->prepare("SELECT * FROM office_hours WHERE location = ? AND course= ?");
+$sql->bind_param("ss", $q, $course);
+$sql->execute();
+$result = $sql->get_result();
 $count = mysqli_num_rows($result);
+$csvDownloadArr = array();
+$counter = 0;
+
 
 echo "<table>
 <tr>
@@ -40,16 +51,23 @@ echo "<table>
 <th>start time</th>
 <th>end time</th>
 </tr>";
+
 while($row = mysqli_fetch_array($result)) {
   echo "<tr>";
   echo "<td>" . $row['email'] . "</td>";
-  echo "<td>" . $row['start_time'] . "</td>";
-  echo "<td>" . $row['expected_end'] . "</td>";
-
+  echo "<td>" . date('h:i a m/d/Y', strtotime($row['start_time'])) . "</td>";
+  echo "<td>" . date('h:i a m/d/Y', strtotime($row['actual_end'])) . "</td>";
+  $tableentry = array($row['email'], $row['course'], $row['location'], $row['start_time'], $row['expected_end']);
+  $csvDownloadArr[$counter] = $tableentry;
   echo "</tr>";
+  $counter++;
 }
 echo "</table>";
+
+$_SESSION['csvDownloadArr'] = $csvDownloadArr;
 mysqli_close($conn);
 ?>
+<br></br>
+<a href="locations.php?hello=true" >Download</a>
 </body>
 </html>
