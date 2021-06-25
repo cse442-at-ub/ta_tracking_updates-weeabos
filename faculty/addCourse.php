@@ -49,5 +49,5 @@ if (!$add_success) {
    $_SESSION['status'] = "add_course_succ";
 }
 
-header("Location: ./facultyManage.php");
+header("Location: ../start.php");
 ?>
