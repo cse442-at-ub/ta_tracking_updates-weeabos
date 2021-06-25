@@ -203,7 +203,7 @@ $_SESSION['status']=NULL;
                       </div>
                       <div class="form-group">
                         <label for="length">Length</label>
-                        <input type="text" name="length" class="form-control" placeholder="Ex: 60" required />
+                        <input type="text" name="length" class="form-control" placeholder="Ex: 90 minutes" required />
                       </div>
                       <div class="form-group">
                         <label for="location">Location</label>
