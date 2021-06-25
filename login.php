@@ -24,7 +24,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["uid"] = $ubit_id;
         header("Location: start.php");
       } else {
-        echo "Your UBIT ID is invalid";
+         $statusType = 'alert-danger';
+         $statusMsg = 'Invalid login, please try again.';
+         echo '<div class="alert '.$statusType.'" role="alert">'.$statusMsg.'</div>';
+      //   echo "Your UBIT ID is invalid";
       }
    }
 ?>
