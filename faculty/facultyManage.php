@@ -141,7 +141,8 @@ $_SESSION['status']=NULL;
             <br/>
             <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/TAinfo.php" class="button">Sort by TA</a> -
             <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/locations.php" class="button">Sort by Location</a> -
-            <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/datesinfo.php" class="button">Sort by Date</a>
+            <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/datesinfo.php" class="button">Sort by Date</a> -
+            <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/TotalOH.php" class="button">Sort by Date</a>
             <br> </br>
 
               <!-- submit form -->
@@ -171,6 +172,40 @@ $_SESSION['status']=NULL;
                       </div>
                       <div class="form-group">
                         <input type="submit" name="add" id="add" class="btn btn-success" value="Add TA" />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="card bg-dark text-white">
+                <div class="card-header" id="addCourse">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#manualAddCourse" aria-expanded="true" aria-controls="manualAddCourse">
+                      Manually Add a Course
+                    </button>
+                  </h2>
+                </div>
+                <div id="manualAddCourse" class="collapse" aria-labelledby="addCourse" data-parent="#AddAccordian">
+                  <div class="card-body">
+                    <form method="post" action="./addCourse.php">
+                      <div class="form-group">
+                        <label for="course">Course</label>
+                        <input type="text" name="course" class="form-control" placeholder="Ex: CSE 101" required />
+                      </div>
+                      <div class="form-group">
+                        <label for="class_name">Class Name</label>
+                        <input type="text" name="class_name" class="form-control" placeholder="Ex: Introduction to Programming" required />
+                      </div>
+                      <div class="form-group">
+                        <label for="length">Length</label>
+                        <input type="text" name="length" class="form-control" placeholder="Ex: 60" required />
+                      </div>
+                      <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" name="location" class="form-control" placeholder="Ex: Davis Hall" required />
+                      </div>
+                      <div class="form-group">
+                        <input type="submit" name="add" id="add" class="btn btn-success" value="Add Course" />
                       </div>
                     </form>
                   </div>
