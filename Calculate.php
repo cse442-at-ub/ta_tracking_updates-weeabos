@@ -83,6 +83,9 @@ echo "<td>" . $sum . " ". "Hour(s)". "</td>";
 echo "</tr>
 </tfoot>";
 echo "</table>";
+?> 
+<br> </br>
+<?php
 echo "The total number of TA Office hours that occurred from"." " . $q ." " .  "and" ." " .  $s ." " .  "is" ." " .  $sum." ". "hour(s)";
 mysqli_close($conn);
 ?>
