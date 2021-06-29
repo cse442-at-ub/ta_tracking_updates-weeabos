@@ -1,4 +1,5 @@
 <?php
+require "lib/pageHeader.php";
 if (
    (!isset($_SERVER['HTTPS'])||($_SERVER['HTTPS']!='on')))
 {header('Location: '. 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);}
@@ -11,14 +12,31 @@ $conn = connect_to_database();
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<style>
+body {background-image: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,1)), url("https://upload.wikimedia.org/wikipedia/commons/1/1d/Alumni_Arena_%28UB%29.jpg");}
+header {color: white;}
+form {color: white;}
+div {color: white;}
+</style>
+<html>
+<header>
+    <?php page_header_emit(); ?>
+</header>
+<br> </br>
+<br> </br>
+</html>
+<head>
 <style>
 table {
   width: 60%;
   border-collapse: collapse;
+  color: white;
 }
 
 table, td, th {
-  border: 1px solid black;
+  border: 3px solid white;
   padding: 5px;
 }
 
