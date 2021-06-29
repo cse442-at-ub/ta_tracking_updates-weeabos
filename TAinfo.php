@@ -16,7 +16,6 @@ body {background-image: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,1)), url("ht
 header {color: white;}
 form {color: white;}
 div {color: white;}
-/* option {color: white;} */
 </style>
 <head>
 <script>

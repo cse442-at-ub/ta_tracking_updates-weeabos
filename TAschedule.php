@@ -12,12 +12,13 @@ session_start();
 <head>
 <style>
 table {
+  color: white;
   width: 60%;
   border-collapse: collapse;
 }
 
 table, td, th {
-  border: 3px solid black;
+  border: 3px solid white;
   padding: 5px;
 }
 
