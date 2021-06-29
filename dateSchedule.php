@@ -11,12 +11,13 @@ session_start();
 <head>
 <style>
 table {
+  color: white;
   width: 60%;
   border-collapse: collapse;
 }
 
 table, td, th {
-  border: 1px solid black;
+  border: 3px solid white;
   padding: 5px;
 }
 
@@ -43,10 +44,10 @@ $result = $sql->get_result();
 
 echo "<table>
 <tr>
-<th>email</th>
-<th>OH Location</th>
-<th>start time</th>
-<th>end time</th>
+<th>Email</th>
+<th>Location</th>
+<th>Start Time</th>
+<th>End Time</th>
 </tr>";
 while($row = mysqli_fetch_array($result)) {
   echo "<tr>";
