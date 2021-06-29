@@ -145,7 +145,8 @@ $_SESSION['status']=NULL;
             <br/>
             <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/TAinfo.php" class="button">Sort by TA</a> -
             <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/locations.php" class="button">Sort by Location</a> -
-            <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/datesinfo.php" class="button">Sort by Date</a>
+            <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/datesinfo.php" class="button">Sort by Date</a> -
+            <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/TotalOH.php" class="button">Sort by Date</a>
             <br> </br>
             <a href="https://www-student.cse.buffalo.edu/CSE442-542/2021-Summer/cse-442c/TotalOH.php" class="button">Calculate Total Office Hours</a>
             <br> </br>
