@@ -45,9 +45,9 @@ $count = mysqli_num_rows($result);
 
 echo "<table>
 <tr>
-<th> OH Location </th>
-<th> OH start time</th>
-<th> OH end time</th>
+<th> Location </th>
+<th> Start Time</th>
+<th> End Time</th>
 </tr>";
 while($row = mysqli_fetch_array($result)) {
   echo "<tr>";
