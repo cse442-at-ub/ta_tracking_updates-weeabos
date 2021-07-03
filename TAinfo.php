@@ -6,20 +6,6 @@ if (
 {header('Location: '. 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);}
 
 session_start();
-
-if(isset($_GET['hello'])){
-  header('Content-Type: text/csv; charset=utf-8');
-  // tell the browser we want to save it instead of displaying it
-  header('Content-Disposition: attachment; filename=locations.csv');
-  $f = fopen('php://output', 'w');
-  fputcsv($f,array('Email', 'Course', 'Location', 'start_time','expected_end'));
-  foreach($_SESSION['csvDownloadArr'] as $outer){
-    fputcsv($f, $outer);
-  }
-  fclose($f);
-  exit();
-}
-
 ?>
 <html>
 <head>
@@ -44,7 +30,7 @@ function showUser(str) {
         document.getElementById("txtHint").innerHTML = this.responseText;
       }
     };
-    xmlhttp.open("GET","locationSchedule.php?q="+str,true);
+    xmlhttp.open("GET","TAschedule.php?q="+str,true);
     xmlhttp.send();
   }
 }
@@ -59,17 +45,11 @@ $dbname = "cse442_2021_summer_team_c_db";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 $course = $_SESSION['courseSelected'];
-$sql =$conn->prepare( "SELECT DISTINCT location FROM office_hours WHERE course= ?");
-
+$sql = $conn->prepare("SELECT DISTINCT registered_users.first_name, registered_users.last_name, registered_users.email, registered_users.faculty, office_hours.email, office_hours.course FROM registered_users INNER JOIN office_hours  ON office_hours.email = registered_users.email WHERE office_hours.course= ? AND registered_users.faculty = 0");
 $sql->bind_param("s", $course);
 $sql->execute();
 $result = $sql->get_result();
 $count = mysqli_num_rows($result);
-$rows = array();
-
-while($row = mysqli_fetch_array($result)){
-  $rows[] = $row['location'];
-}
 ?>
 <html>
 <header>
@@ -80,17 +60,17 @@ while($row = mysqli_fetch_array($result)){
 </html>
 <form class="text-center">
 <select name="users" onchange="showUser(this.value)">
-<option value="">Select a Location:</option>
-<?php for ($i = 0; $i < count($rows); $i++) { ?>
+<option value="">Select a Name:</option>
+<?php while($row = mysqli_fetch_array($result)){?>
 
-  <option value= "<?php echo $rows[$i]; ?>" > <?php echo $rows[$i]; ?></option>
-  <?php } ?>
+  <option value= "<?php echo $row['email']; ?>" > <?php echo $row['first_name']. ' '. $row['last_name']; ?></option>
+  <?php  }?>
   </select>
 
 </form>
 
 <br>
-<div class="text-center" id="txtHint"><b>Location information for <?php echo $_SESSION['courseSelected'] ?> will be shown</b></div>
+<div class="text-center" id="txtHint"><b>Teaching Assistant information for <?php echo $_SESSION['courseSelected'] ?> will be shown</b></div>
 
 </body>
 </html>
