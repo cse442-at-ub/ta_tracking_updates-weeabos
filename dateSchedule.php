@@ -58,7 +58,7 @@ while($row = mysqli_fetch_array($result)) {
   echo "<td>" . $row['location'] . "</td>";
   echo "<td>" . date('h:i a m/d/Y', strtotime($row['start_time'])) . "</td>";
   echo "<td>" . date('h:i a m/d/Y', strtotime($row['actual_end'])) . "</td>";
-  $tableentry = array($row['email'], $row['course'], $row['location'], $row['start_time'], $row['expected_end']);
+  $tableentry = array($row['email'], $row['course'], $row['location'], $row['start_time'], $row['actual_end']);
   $csvDatesArr[$counter] = $tableentry;
   echo "</tr>";
   $counter++;
