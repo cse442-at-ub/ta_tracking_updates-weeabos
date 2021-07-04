@@ -42,6 +42,8 @@ $sql->bind_param("ss", $q, $course);
 $sql->execute();
 $result = $sql->get_result();
 $count = mysqli_num_rows($result);
+$csvTAnameArr = array();
+$counter = 0;
 
 echo "<table>
 <tr>
@@ -54,11 +56,15 @@ while($row = mysqli_fetch_array($result)) {
   echo "<td>" . $row['location'] . "</td>";
   echo "<td>" . date('h:i a m/d/Y', strtotime($row['start_time'])) . "</td>";
   echo "<td>" . date('h:i a m/d/Y', strtotime($row['actual_end'])) . "</td>";
-
+  $tableentry = array($row['email'], $row['course'], $row['location'], $row['start_time'], $row['expected_end']);
+  $csvTAnameArr[$counter] = $tableentry;
   echo "</tr>";
+  $counter++;
 }
 echo "</table>";
+$_SESSION['csvTAnameArr'] = $csvTAnameArr;
 mysqli_close($conn);
 ?>
+<a href="TAinfo.php?TAname=true" >Download</a>
 </body>
 </html>
