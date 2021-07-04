@@ -1,3 +1,4 @@
+
 <?php
 
 if (
@@ -40,7 +41,9 @@ $sql = $conn->prepare("SELECT * FROM office_hours WHERE  JustDate = ? AND course
 $sql->bind_param("ss", $q, $course);
 $sql->execute();
 $result = $sql->get_result();
-
+$count = mysqli_num_rows($result);
+$csvDatesArr = array();
+$counter = 0;
 
 echo "<table>
 <tr>
@@ -55,11 +58,16 @@ while($row = mysqli_fetch_array($result)) {
   echo "<td>" . $row['location'] . "</td>";
   echo "<td>" . date('h:i a m/d/Y', strtotime($row['start_time'])) . "</td>";
   echo "<td>" . date('h:i a m/d/Y', strtotime($row['actual_end'])) . "</td>";
-
+  $tableentry = array($row['email'], $row['course'], $row['location'], $row['start_time'], $row['expected_end']);
+  $csvDatesArr[$counter] = $tableentry;
   echo "</tr>";
+  $counter++;
 }
 echo "</table>";
+$_SESSION['csvDatesArr'] = $csvDatesArr;
 mysqli_close($conn);
 ?>
+<br></br>
+<a href="datesinfo.php?dates=true" >Download</a>
 </body>
 </html>

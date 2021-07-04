@@ -7,13 +7,13 @@ if (
 
 session_start();
 
-if(isset($_GET['hello'])){
+if(isset($_GET['location'])){
   header('Content-Type: text/csv; charset=utf-8');
   // tell the browser we want to save it instead of displaying it
   header('Content-Disposition: attachment; filename=locations.csv');
   $f = fopen('php://output', 'w');
   fputcsv($f,array('Email', 'Course', 'Location', 'start_time','expected_end'));
-  foreach($_SESSION['csvDownloadArr'] as $outer){
+  foreach($_SESSION['csvLocationArr'] as $outer){
     fputcsv($f, $outer);
   }
   fclose($f);

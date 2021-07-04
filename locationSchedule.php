@@ -42,7 +42,7 @@ $sql->bind_param("ss", $q, $course);
 $sql->execute();
 $result = $sql->get_result();
 $count = mysqli_num_rows($result);
-$csvDownloadArr = array();
+$csvLocationArr = array();
 $counter = 0;
 
 
@@ -59,16 +59,16 @@ while($row = mysqli_fetch_array($result)) {
   echo "<td>" . date('h:i a m/d/Y', strtotime($row['start_time'])) . "</td>";
   echo "<td>" . date('h:i a m/d/Y', strtotime($row['actual_end'])) . "</td>";
   $tableentry = array($row['email'], $row['course'], $row['location'], $row['start_time'], $row['expected_end']);
-  $csvDownloadArr[$counter] = $tableentry;
+  $csvLocationArr[$counter] = $tableentry;
   echo "</tr>";
   $counter++;
 }
 echo "</table>";
 
-$_SESSION['csvDownloadArr'] = $csvDownloadArr;
+$_SESSION['csvLocationArr'] = $csvLocationArr;
 mysqli_close($conn);
 ?>
 <br></br>
-<a href="locations.php?hello=true" >Download</a>
+<a href="locations.php?location=true" >Download</a>
 </body>
 </html>
