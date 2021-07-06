@@ -7,6 +7,19 @@ if (
 
 session_start();
 $course = $_SESSION['courseSelected'];
+
+if(isset($_GET['dates'])){
+  header('Content-Type: text/csv; charset=utf-8');
+  // tell the browser we want to save it instead of displaying it
+  header('Content-Disposition: attachment; filename=dates.csv');
+  $f = fopen('php://output', 'w');
+  fputcsv($f,array('Email', 'Course', 'Location', 'start_time','actual_end'));
+  foreach($_SESSION['csvDatesArr'] as $outer){
+    fputcsv($f, $outer);
+  }
+  fclose($f);
+  exit();
+}
 ?>
 <html>
 <head>
