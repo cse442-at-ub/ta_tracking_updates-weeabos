@@ -79,7 +79,7 @@ while($row = mysqli_fetch_array($result)){
   <th> TA Email</th>
   <th>start time</th>
   <th>end time</th>
-  
+  <th> course </th>
   </tr>";
   
   
@@ -93,6 +93,7 @@ while($row = mysqli_fetch_array($result)){
   echo "<td>" . $roemail[$i]  . "</td>";
   echo "<td>" . date('h:i a m/d/Y', strtotime($rowS[$i])) . "</td>";
   echo "<td>" . date('h:i a m/d/Y', strtotime($rowE[$i])) . "</td>";
+  echo "<td>" . $course  . "</td>";
   echo "</tr>";
   
 }
