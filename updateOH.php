@@ -87,6 +87,7 @@ while($row = mysqli_fetch_array($result)){
 
   <td> <input form="<?php echo $i?>" type="date" id="date" name="date" value ="<?php echo htmlspecialchars($dtstartdate) ?>"></td>
   <input form = "<?php echo $i?>" type="hidden" id="old_date" name="old_date"value = "<?php echo $dtold?>">
+  <input form = "<?php echo $i?>" type="hidden" id="old_end_time" name="old_end_time"value = "<?php echo $dtendtime?>">
   <td><input form="<?php echo $i?>" type="time" id="start_time" name="start_time"value ="<?php echo htmlspecialchars($dtstarttime) ?>"></td>
   <td><input form="<?php echo $i?>" type="time" id="end_time" name="end_time"value ="<?php echo htmlspecialchars($dtendtime) ?>"> </td>
   <td><input form="<?php echo $i?>" type="submit"></td>
